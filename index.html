@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Pizza Manager — Estoque e Notificações</title>
+
+  <!-- 🔥 PWA / MANIFEST -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff7a18">
+
+  <!-- (opcional, mas bom para iPhone) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="container">
+    <h1>Pizza Manager</h1>
+
+    <section class="recipe">
+      <h2>Calculadora de Ingredientes por Pizza</h2>
+      <label>Quantas pizzas?</label>
+      <input id="numPizzas" type="number" min="1" value="1" />
+      <button id="calcBtn">Calcular</button>
+      <div id="calcResult"></div>
+    </section>
+
+    <hr/>
+
+    <section class="stock">
+      <h2>Controle de Estoque</h2>
+
+      <form id="addIngredientForm">
+        <input id="name" placeholder="Nome do ingrediente" required />
+        <input id="qty" type="number" placeholder="Quantidade atual (g ou un)" required />
+        <input id="min" type="number" placeholder="Quantidade mínima p/ alerta" required />
+        <button type="submit">Adicionar / Atualizar</button>
+      </form>
+
+      <ul id="ingredientsList"></ul>
+    </section>
+
+    <hr/>
+
+    <section>
+      <h2>Notificações</h2>
+      <p>Permissão: <span id="permStatus">--</span></p>
+      <button id="requestPermBtn">Registrar para notificações</button>
+    </section>
+  </main>
+
+  <!-- 🔥 FIREBASE (somente inicialização) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBsfV-g5aqyKXE49CgbzJYHvwT5uIlLBq0",
+      authDomain: "restaurante-a845e.firebaseapp.com",
+      projectId: "restaurante-a845e",
+      storageBucket: "restaurante-a845e.firebasestorage.app",
+      messagingSenderId: "937469720058",
+      appId: "1:937469720058:web:0985ffb7baf9641a88a043",
+      measurementId: "G-PEL76Q95NN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    try { getAnalytics(app); } catch(e){}
+    window.__FIREBASE_APP__ = app;
+  </script>
+
+  <!-- 🔥 SEU JS PRINCIPAL -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
